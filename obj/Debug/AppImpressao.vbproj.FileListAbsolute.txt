@@ -1,15 +1,3 @@
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe.config
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.pdb
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Zen.Barcode.Core.dll
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmMensagem.resources
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmReimpressao.resources
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.Resources.resources
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.GenerateResource.cache
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CoreCompileInputs.cache
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CopyComplete
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.exe
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.pdb
 C:\Users\mathe\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe.config
 C:\Users\mathe\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe
 C:\Users\mathe\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.pdb
@@ -30,11 +18,287 @@ C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTyp
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\msvcr120.dll
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe.config
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.pdb
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Design.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.WinForms.dll
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.SqlServer.Types.dll
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
-C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\Zen.Barcode.Core.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\EnvDTE.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\stdole.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\EnvDTE.xml
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.AssemblyReference.cache
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.SuggestedBindingRedirects.cache
 C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.FParametros.resources
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmMensagem.resources
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmReimpressao.resources
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.Resources.resources
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.GenerateResource.cache
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CoreCompileInputs.cache
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CopyComplete
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.exe
+C:\Users\rodri\OneDrive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.pdb
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe.config
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.pdb
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Design.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Zen.Barcode.Core.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\EnvDTE.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\stdole.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\EnvDTE.xml
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.AssemblyReference.cache
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.FParametros.resources
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmMensagem.resources
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmReimpressao.resources
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.Resources.resources
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.GenerateResource.cache
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CoreCompileInputs.cache
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.exe
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.pdb
+C:\Users\rodri\Google Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpre.55F13785.Up2Date
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe.config
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.exe
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\AppImpressao.pdb
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Common.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Design.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Microsoft.SqlServer.Types.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\Zen.Barcode.Core.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\EnvDTE.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.AssemblyReference.cache
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.FParametros.resources
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmMensagem.resources
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.frmReimpressao.resources
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.Resources.resources
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.GenerateResource.cache
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CoreCompileInputs.cache
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpre.55F13785.Up2Date
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.exe
+G:\Meu Drive\Projetos_VB\Projects\AppImpressao\obj\Debug\AppImpressao.pdb
+C:\app\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+C:\app\Projects\AppImpressao\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\app\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+C:\app\Projects\AppImpressao\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+C:\app\Projects\AppImpressao\bin\Debug\AppImpressao.exe.config
+C:\app\Projects\AppImpressao\bin\Debug\AppImpressao.exe
+C:\app\Projects\AppImpressao\bin\Debug\AppImpressao.pdb
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.Design.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\app\Projects\AppImpressao\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Buffers.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Formats.Asn1.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Memory.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Numerics.Vectors.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Text.Encodings.Web.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Text.Json.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\app\Projects\AppImpressao\bin\Debug\System.ValueTuple.dll
+C:\app\Projects\AppImpressao\bin\Debug\Zen.Barcode.Core.dll
+C:\app\Projects\AppImpressao\bin\Debug\EnvDTE.dll
+C:\app\Projects\AppImpressao\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Buffers.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Formats.Asn1.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Memory.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Numerics.Vectors.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Text.Encodings.Web.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Text.Json.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\app\Projects\AppImpressao\bin\Debug\System.ValueTuple.xml
+C:\app\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.AssemblyReference.cache
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.FParametros.resources
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.frmMensagem.resources
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.frmReimpressao.resources
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.Resources.resources
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.GenerateResource.cache
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.vbproj.CoreCompileInputs.cache
+C:\app\Projects\AppImpressao\obj\Debug\AppImpre.55F13785.Up2Date
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.exe
+C:\app\Projects\AppImpressao\obj\Debug\AppImpressao.pdb

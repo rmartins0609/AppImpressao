@@ -16,8 +16,8 @@ Module ArquivosTXT
     End Function
 
     Public Function fGravaLog(ByVal sLog As String, ByVal sFileName As String)
-        Dim sGravaLog As String = lerINI(vGlobal.Arquivo, "LOGS", "GRAVALOG")
-        Dim FileName As String = lerINI(vGlobal.Arquivo, "LOGS", sFileName)
+        Dim sGravaLog As String = dadosarquivoini(("LOGS", "GRAVALOG"))
+        Dim FileName As String = dadosarquivoini(("LOGS", sFileName))
         Try
             If sGravaLog = "S" Then
                 Dim dir As IO.Directory
@@ -49,6 +49,46 @@ Module ArquivosTXT
             End If
         Catch ex As Exception
             '  MsgBox("Erro:" & ex.Message, MsgBoxStyle.Information, "Error")
+        End Try
+    End Function
+
+    Private ReadOnly logLock As New Object()
+    Public Function fGravaLogDebug(ByVal sLog As String, ByVal sFileName As String)
+        Try
+            ' 1. Valida se o log está ativo
+            Dim sGravaLog As String = dadosarquivoini(("LOGS", "LOGDEBUG"))
+            If sGravaLog <> "S" Then Exit Function
+
+            ' 2. Prepara os caminhos
+            Dim fileNameConfig As String = dadosarquivoini(("LOGS", sFileName))
+            Dim caminhoDir As String = Arquivo_log
+            Dim sArquivo As String = System.IO.Path.Combine(caminhoDir, fileNameConfig)
+
+            ' 3. Garante a existência do diretório (Directory.CreateDirectory já faz a checagem internamente)
+            If Not System.IO.Directory.Exists(caminhoDir) Then
+                System.IO.Directory.CreateDirectory(caminhoDir)
+            End If
+
+            ' 4. Bloqueia a execução paralela na mesma aplicação
+            SyncLock logLock
+                ' Verifica o tamanho do arquivo se ele existir
+                Dim infoArquivo As New System.IO.FileInfo(sArquivo)
+                If infoArquivo.Exists AndAlso (infoArquivo.Length / 1024) > 100 Then
+                    ' Limpa o arquivo sem precisar deletar/recriar na mão
+                    System.IO.File.WriteAllText(sArquivo, String.Empty)
+                End If
+
+                ' 5. Escreve no log permitindo que outros processos também leiam/escrevam (FileShare.ReadWrite)
+                Using fs As New System.IO.FileStream(sArquivo, System.IO.FileMode.Append, System.IO.FileAccess.Write, System.IO.FileShare.ReadWrite)
+                    Using writer As New System.IO.StreamWriter(fs)
+                        writer.WriteLine($"{Now} - {sLog}")
+                    End Using
+                End Using
+            End SyncLock
+
+        Catch ex As Exception
+            ' Evita exibir pop-up para o usuário final em falhas secundárias de gravação de log
+            System.Diagnostics.Debug.WriteLine($"Erro ao gravar log: {ex.Message}")
         End Try
     End Function
 

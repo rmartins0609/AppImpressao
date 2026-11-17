@@ -1,7 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Text
-Imports System.Globalization
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Menu
 
 Public Class FParametros
     Private Shared Function GetPrivateProfileString(ByVal section As String, ByVal key As String, ByVal def As String, ByVal retVal As StringBuilder, ByVal size As Integer, ByVal filePath As String) As Integer

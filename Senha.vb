@@ -1,5 +1,5 @@
 ﻿Module Senha
-    Dim sSensitive_Logon As String = lerINI(vGlobal.Arquivo, "BANCODADOS", "SENSITIVE_LOGON")
+    Dim sSensitive_Logon As String = dadosarquivoini(("BANCODADOS", "SENSITIVE_LOGON"))
 
     Public Function fDescrSenha(ByVal sPass)
         Dim Ascii As String = ""

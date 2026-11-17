@@ -1,231 +1,260 @@
-﻿Imports System.Data.OracleClient
+﻿'Imports System.Data.OracleClient
+Imports Oracle.ManagedDataAccess.Client
+Imports System.Text
+Imports System.IO
 Module MDI
     Public Sub AtualizaVariaveis()
 
-        vGlobal.Arquivo = "" & Application.StartupPath & "\configuracao.ini"
-        vGlobal.vInstLogin = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "INSTANCIA")
+        vGlobal.vInstLogin = dadosarquivoini(("PARAMETROS", "INSTANCIA"))
+        'vGlobal.vNomePc = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "NOME_PC")
+
+        Dim nomepc As String
+        If Environment.GetEnvironmentVariable("CLIENTNAME") = Nothing Then
+            nomepc = Environment.MachineName
+        Else
+            nomepc = Environment.GetEnvironmentVariable("CLIENTNAME")
+        End If
+        vGlobal.vNomePc = nomepc
 
         'Banco de Dados
-        vGlobal.sServiceName = ArquivosTXT.lerINI(vGlobal.Arquivo, "BANCODADOS", "SERVICE_NAME")
-        vGlobal.sUser = ArquivosTXT.lerINI(vGlobal.Arquivo, "BANCODADOS", "USER")
-        vGlobal.sPassword = Senha.fDescrSenha(ArquivosTXT.lerINI(vGlobal.Arquivo, "BANCODADOS", "PASSWORD"))
-        vGlobal.sSensitiveLogon = ArquivosTXT.lerINI(vGlobal.Arquivo, "BANCODADOS", "SENSITIVE_LOGON")
-        vGlobal.sUpperCase = ArquivosTXT.lerINI(vGlobal.Arquivo, "BANCODADOS", "UPPERCASE")
+        vGlobal.sServiceName = dadosarquivoini(("BANCODADOS", "SERVICE_NAME"))
+        vGlobal.sUser = dadosarquivoini(("BANCODADOS", "USER"))
+        vGlobal.sPassword = Senha.fDescrSenha(dadosarquivoini(("BANCODADOS", "PASSWORD")))
+        vGlobal.sSensitiveLogon = dadosarquivoini(("BANCODADOS", "SENSITIVE_LOGON"))
+        vGlobal.sUpperCase = dadosarquivoini(("BANCODADOS", "UPPERCASE"))
 
-        vGlobal.vModeloImpressao = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "MODELOREL")
-        vGlobal.gs01 = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "DESCRMARCDAGUA1")
-        vGlobal.gs02 = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "DESCRMARCDAGUA2")
-        vGlobal.vTimerImpressao = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "TIMER_IMPRESSAO")
-        vGlobal.vNomeImpressora = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "NOMEIMPRESSORA")
-        vGlobal.vNumeroCopias = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "NUMEROCOPIAS")
-        vGlobal.sCliente = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "CLIENTE")
-        vGlobal.vIMPRLIBSEPARADA = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "IMPRLIBSEPARADA")
+        vGlobal.vModeloImpressao = dadosarquivoini(("PARAMETROS", "MODELOREL"))
+        vGlobal.gs01 = dadosarquivoini(("PARAMETROS", "DESCRMARCDAGUA1"))
+        vGlobal.gs02 = dadosarquivoini(("PARAMETROS", "DESCRMARCDAGUA2"))
+        vGlobal.vTimerImpressao = dadosarquivoini(("PARAMETROS", "TIMER_IMPRESSAO"))
+        vGlobal.vNomeImpressora = dadosarquivoini(("PARAMETROS", "NOMEIMPRESSORA"))
+        vGlobal.vNumeroCopias = dadosarquivoini(("PARAMETROS", "NUMEROCOPIAS"))
+        vGlobal.vNumCopiasExtrProduto = dadosarquivoini(("PARAMETROS", "NUMCOPIAS_EXTR_PRODUTO"))
+        vGlobal.vNumCopiasTicketPatio = dadosarquivoini(("PARAMETROS", "NUMCOPIAS_TICKET_PATIO"))
+        vGlobal.vNumCopiasExtrSaidaCana = dadosarquivoini(("PARAMETROS", "NUMCOPIAS_EXTR_SAIDA_CANA"))
+        vGlobal.vNumCopiasLaboratCana = dadosarquivoini(("PARAMETROS", "NUMCOPIAS_LABORAT_CANA"))
+        vGlobal.vNumCopiasBoletimentr = dadosarquivoini(("PARAMETROS", "NUMCOPIAS_BOLETIM_ENTR"))
+        vGlobal.vRetratoPaisagem = dadosarquivoini(("PARAMETROS", "RETRATOPAISAGEM"))
+        vGlobal.sCliente = dadosarquivoini(("PARAMETROS", "CLIENTE"))
+        vGlobal.vIMPRLIBSEPARADA = dadosarquivoini(("PARAMETROS", "IMPRLIBSEPARADA"))
+        vGlobal.vNUMERO_CARACTER_LINHA_OBS = dadosarquivoini(("PARAMETROS", "NUMERO_CARACTER_LINHA_OBS"))
+        vGlobal.vTICKETENTRSORT = dadosarquivoini(("PARAMETROS", "TICKETENTRSORT"))
+        vGlobal.vImprTela = dadosarquivoini(("PARAMETROS", "IMPR_TELA"))
+        vGlobal.vTipoFonte = dadosarquivoini(("PARAMETROS", "FONTE_IMPRESSAO"))
+        vGlobal.ModeloImprTermica = dadosarquivoini(("PARAMETROS", "MODELO_IMPR_TERMICA"))
 
 
         'Habilita Impressão
-        vGlobal.vImprExtrSaida = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "IMPREXTRSAIDA")
-        vGlobal.vImprOrdemCarga = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "IMPRORDEMCARGA")
-        vGlobal.vImprBolAnl = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "IMPRBOLANL")
-        vGlobal.vImprExtrProduto = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "IMPREXTRPRODUTO")
+        vGlobal.vImprExtrSaida = dadosarquivoini(("PARAMETROS", "IMPREXTRSAIDA"))
+        vGlobal.vImprExtrEntr = dadosarquivoini(("PARAMETROS", "IMPRBOLENTR"))
+        vGlobal.vImprOrdemCarga = dadosarquivoini(("PARAMETROS", "IMPRORDEMCARGA"))
+        vGlobal.vImprBolAnl = dadosarquivoini(("PARAMETROS", "IMPRBOLANL"))
+        vGlobal.vImprExtrProduto = dadosarquivoini(("PARAMETROS", "IMPREXTRPRODUTO"))
+        vGlobal.vImprTicketRast = dadosarquivoini(("PARAMETROS", "IMPRETICKETRAST"))
 
         'Timer Threads
-        vGlobal.VTimerOrdemCarga = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "TIMER_IMPR_ORDEMCARGA")
-        vGlobal.VTimerBoletimAnalises = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "TIMER_IMPR_BOLANL")
-        vGlobal.VTimerExtratoSaida = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "TIMER_IMPR_EXTRSAIDA")
-        vGlobal.VTimerExtrProduto = ArquivosTXT.lerINI(vGlobal.Arquivo, "PARAMETROS", "TIMER_IMPR_EXTRPROD")
+        vGlobal.VTimerOrdemCarga = dadosarquivoini(("PARAMETROS", "TIMER_IMPR_ORDEMCARGA"))
+        vGlobal.VTimerBoletimAnalises = dadosarquivoini(("PARAMETROS", "TIMER_IMPR_BOLANL"))
+        vGlobal.VTimerExtratoSaida = dadosarquivoini(("PARAMETROS", "TIMER_IMPR_EXTRSAIDA"))
+        vGlobal.VTimerExtrProduto = dadosarquivoini(("PARAMETROS", "TIMER_IMPR_EXTRPROD"))
 
+        'BUDEGUER - Descrições da Empresa a ser impressa
+        vGlobal.sDESCR_EMPRESA = dadosarquivoini(("EMPRESA", "DESCR_EMPRESA"))
+        vGlobal.sDESCR_L1 = dadosarquivoini(("EMPRESA", "DESCR_L1"))
+        vGlobal.sDESCR_L2 = dadosarquivoini(("EMPRESA", "DESCR_L2"))
+        vGlobal.sDESCR_L3 = dadosarquivoini(("EMPRESA", "DESCR_L3"))
+        vGlobal.sDESCR_L4 = dadosarquivoini(("EMPRESA", "DESCR_L4"))
 
+        'BALCANES - Realiza a impressão da quantidade de litros na ordem de carga
+        vGlobal.sValor05 = dadosarquivoini(("PARAMETROS", "FG_IMPR_LITRO"))
 
+        vGlobal.EMPRESA_PRD = dadosarquivoini(("EMPRESA", "EMPRESA_PRD"))
 
+        'Tipo de corte do papel, para impressora termica
+        vGlobal.TipoCortePapel = dadosarquivoini(("PARAMETROS", "TIPO_CORTE_PAPEL"))
+
+        'Unidade Industrial
+        vGlobal.sUnidInd = dadosarquivoini(("PARAMETROS", "CD_UNID_IND"))
 
     End Sub
-
-    <Obsolete> Public Function fValidaUsuario(ByVal usuario) As Boolean
-        Try
-            Dim resultado As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select * from pmusuarios" & vbCrLf &
-                  "where cd_usuario = '" & usuario & "'"
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                resultado = rs("cd_usuario")
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
-
-            If resultado = Nothing Then
-                Return False
-            Else
-                Return True
-            End If
-
-        Catch ex As Exception
-            MsgBox("fValidaUsuario: " & ex.ToString, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Function
-
-    <Obsolete> Public Function fValidaSenhaUser(ByVal usuario) As String
-        Try
-            Dim resultado As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select fg_pwd from pmusuarios" & vbCrLf &
-                  "where cd_usuario = '" & usuario & "'"
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                resultado = rs("fg_pwd")
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
-
-            resultado = fDescrSenha(resultado)
-            Return resultado
-
-        Catch ex As Exception
-            MsgBox("fValidaUsuario: " & ex.ToString, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Function
-
-    <Obsolete> Public Function fValidaPerfil(ByVal usuario) As Boolean
-        Dim resultado As String = Nothing
-        Dim sql As String
-        Dim rs As OracleDataReader
-        sql = "SELECT CD_ACAO" & vbCrLf &
-                "From PMUSUARIOS U, PMUSUARIOS_INST UI," & vbCrLf &
-                     "PMAUTORIDADES PA" & vbCrLf &
-                "Where PA.CD_GRUPO = UI.CD_GRUPO" & vbCrLf &
-                  "And U.CD_USUARIO = UI.CD_USUARIO" & vbCrLf &
-                  "And UI.INSTANCIA = '" & vInstLogin & "'" & vbCrLf &
-                  "And U.CD_USUARIO = '" & usuario & "'" & vbCrLf &
-                  "And PA.CD_ACAO = '0'" & vbCrLf &
-                  "And PA.CD_APLICAT = 'ZBC_CASS'"
-        rs = fCmd(sql).ExecuteReader
-        While rs.Read
-            resultado = rs("cd_acao")
-        End While
-        fCmd(sql).Dispose()
-        rs.Close()
-
-        If resultado = Nothing Then
-            Return False
-        Else
-            Return True
-        End If
-    End Function
 
     Public Sub Mensagem(ByVal mensagem)
         vMensangem = mensagem
-        FrmMensagem.Show()
+        frmMensagem.Show()
     End Sub
 
-    Public Function fBuscaCadastro(ByVal tabela, ByVal coluna, ByVal where, ByVal valor)
+    Public Function FBuscaRemito(OdemCarga) As String
         Try
-            Dim resultado As String = Nothing
+            Dim result As String
             Dim sql As String
             Dim rs As OracleDataReader
-            sql = "select " & coluna & " coluna from " & tabela & vbCrLf &
-                  "where " & where & " = '" & valor & "'"
+            sql += "select nvl(no_remito,0) remito from SYN_INT_PIMS_093m" & vbNewLine
+            sql += "where instancia = '" & vInstLogin & "'" & vbNewLine
+            sql += "  and cd_ordem_car = " & OdemCarga & ""
+            fGravaLog("*** Busca Remito ***", "LOG_DEBUG")
+            fGravaLog(sql, "LOG_DEBUG")
             rs = fCmd(sql).ExecuteReader
             While rs.Read
-                resultado = rs("coluna")
+                result = rs("remito")
             End While
+            fGravaLog(result, "LOG_DEBUG")
             fCmd(sql).Dispose()
             rs.Close()
-
-            If resultado = Nothing Then
-                Return "###"
-            ElseIf resultado <> Nothing Then
-                Return resultado
-            End If
-
+            Return result
         Catch ex As Exception
-msgbox(ex.ToString,MsgBoxStyle.Critical,"Error")
+            MsgBox("FBuscaRemito>>" & ex.ToString, MsgBoxStyle.Critical, "Error")
         End Try
     End Function
 
-    Public Function fGetParam(ByVal secao, ByVal entrada) As String
-        Try
-            Dim resultado As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select valor from parametros" & vbCrLf &
-                  "where instancia = '" & vInstLogin & "'" & vbCrLf &
-                  "  and secao = '" & secao & "'" & vbCrLf &
-                  "  and entrada = '" & entrada & "'"
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                resultado = rs("valor")
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
-            If resultado <> Nothing Then
-                Return resultado
+    Public Function GetDebugSql(cmd As OracleCommand) As String
+        Dim sb As New Text.StringBuilder(cmd.CommandText)
+        'For Each param As OracleParameter In cmd.Parameters
+        '    Dim value = If(param.Value Is Nothing, "NULL", $"{param.Value.ToString().Replace("'", "''")}")
+        '    sb.Replace(param.ParameterName, value)
+        'Next
+        For Each p As OracleParameter In cmd.Parameters
+            Dim valor As String
+
+            If p.Value Is Nothing OrElse p.Value Is DBNull.Value Then
+                valor = "NULL"
+            ElseIf TypeOf p.Value Is String OrElse TypeOf p.Value Is Date Then
+                valor = "'" & p.Value.ToString().Replace("'", "''") & "'"
             Else
-                Return 0
+                valor = p.Value.ToString()
             End If
-        Catch ex As Exception
-            vMensangem += "Erro [fGetParam] - " & ex.ToString & vbCrLf
-        End Try
+
+            sb = sb.Replace(":" & p.ParameterName, valor)
+        Next
+        Return sb.ToString()
     End Function
 
-    Public Function fValidaRemito(ByVal NoRemito, ByVal fazenda, ByVal Liberacao) As Boolean
-        Try
-            Dim resultado As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select * from apt_cargas" & vbCrLf &
-                  "where pno_remito = '" & NoRemito & "'" & vbCrLf &
-                  "  and instancia = '" & vInstLogin & "'" & vbCrLf &
-                  "  and cd_upnivel1 = '" & fazenda & "'" & vbCrLf &
-                  "  and no_liberacao != '" & Liberacao & "'"
-            vMensangem += sql & vbCrLf
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                resultado = rs("pno_remito")
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
-            If resultado <> Nothing Then
-                Return True
-            Else
-                Return False
-            End If
-        Catch ex As Exception
-            vMensangem += "" & ex.ToString & vbCrLf
-            frmMensagem.Show()
-        End Try
+    Public Function FMensagem(mensagem As String, tipo As String) As Boolean
+        Select Case tipo
+            Case "I"
+                MsgBox(mensagem, MsgBoxStyle.Information, "Aviso")
+            Case "E"
+                MsgBox(mensagem, MsgBoxStyle.Exclamation, "Aviso")
+            Case "C"
+                MsgBox(mensagem, MsgBoxStyle.Critical, "Aviso")
+            Case "Q"
+                If (MsgBox(mensagem, MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Aviso") = MsgBoxResult.Yes) Then
+                    Return True
+                Else
+                    Return False
+                End If
+        End Select
     End Function
 
-    Public Function fDescricao(tabela, descricao, coluna, valor) As String
-        Try
-            Dim resultado As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select " & descricao & " descricao from " & tabela & vbNewLine &
-                  "where " & coluna & "= '" & valor & "'"
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                resultado = rs("descricao")
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
-            If resultado = Nothing Then
-                Return " "
-            ElseIf resultado <> Nothing Then
-                Return resultado
-            End If
-        Catch ex As Exception
-            vMensangem += "" & ex.ToString & vbCrLf
-            frmMensagem.Show()
-        End Try
-    End Function
+    Public Class GeraArquivoINI
+        Public Shared Function Dados(carminhoarquivo As String) As Dictionary(Of (String, String), String)
+            Dim resultado As New Dictionary(Of (String, String), String)
+            Dim secaoatual As String = Nothing
 
-    Public Function FCgcParaCuit(valor) As String
-        Dim sValor As String = Nothing
-        sValor = valor.Replace(".", "").Replace("/", "")
-        sValor = sValor.Insert(2, "-").Insert(sValor.Length - 1, "-")
-        Return sValor
-    End Function
+            For Each linha In File.ReadAllLines(carminhoarquivo)
+                Dim l = linha.Trim()
+
+                ' Ignora linhas vazias e comentários
+
+                If String.IsNullOrEmpty(l) OrElse l.StartsWith("#") Then Continue For
+                If l.StartsWith("[") AndAlso l.EndsWith("]") Then
+                    secaoatual = l.Substring(1, l.Length - 2)
+                ElseIf secaoatual IsNot Nothing AndAlso l.Contains("=") Then
+                    Dim partes = l.Split({"="c}, 2)
+                    Dim chave = partes(0).Trim()
+                    Dim valor = partes(1).Trim()
+                    If Not resultado.ContainsKey((secaoatual, chave)) Then
+                        resultado.Add((secaoatual, chave), valor)
+                    End If
+                End If
+            Next
+            Return resultado
+        End Function
+
+        Private Shared dicconfiginicial As New Dictionary(Of (String, String), String) From {
+        {("BANCODADOS", "SERVICE_NAME"), "localhost:1521/orapims"},
+        {("BANCODADOS", "SENSITIVE_LOGON"), "S"},
+        {("BANCODADOS", "UPPERCASE"), "S"},
+        {("BANCODADOS", "USER"), "PIMSCS"},
+        {("BANCODADOS", "PASSWORD"), "072064069078067090"},
+        {("EMPRESA", "EMPRESA_PRD"), "1"},
+        {("EMPRESA", "DESCR_EMPRESA"), "*** DESCRICAO DA EMPRESA ***"},
+        {("EMPRESA", "DESCR_L1"), "*** DESCRICAO LABEL 1 ***"},
+        {("EMPRESA", "DESCR_L2"), "*** DESCRICAO LABEL 2 ***"},
+        {("EMPRESA", "DESCR_L3"), "*** DESCRICAO LABLE 3 ***"},
+        {("EMPRESA", "DESCR_L4"), "*** DESCRICAO LABEL 4 ***"},
+        {("PARAMETROS", "MODELO_IMPR_TERMICA"), "BEMATHECH"},
+        {("PARAMETROS", "INSTANCIA"), "001"},
+        {("PARAMETROS", "NOMEIMPRESSORA"), "NOME DA IMPRESSORA"},
+        {("PARAMETROS", "FONTE_IMPRESSAO"), "Arial"},
+        {("PARAMETROS", "NUMEROCOPIAS"), "1"},
+        {("PARAMETROS", "NUMCOPIAS_EXTR_PRODUTO"), "1"},
+        {("PARAMETROS", "NUMCOPIAS_TICKET_PATIO"), "1"},
+        {("PARAMETROS", "NUMCOPIAS_EXTR_SAIDA_CANA"), "1"},
+        {("PARAMETROS", "NUMCOPIAS_LABORAT_CANA"), "1"},
+        {("PARAMETROS", "NUMCOPIAS_BOLETIM_ENTR"), "1"},
+        {("PARAMETROS", "TIMER_IMPRESSAO"), "60"},
+        {("PARAMETROS", "TIMER_IMPR_ORDEMCARGA"), "1000"},
+        {("PARAMETROS", "TIMER_IMPR_BOLANL"), "2000"},
+        {("PARAMETROS", "TIMER_IMPR_EXTRSAIDA"), "3000"},
+        {("PARAMETROS", "TIMER_IMPR_BOL_ENTR"), "4000"},
+        {("PARAMETROS", "TIMER_IMPR_EXTRPROD"), "5000"},
+        {("PARAMETROS", "TIMER_IMPR_TICKETRAST"), "6000"},
+        {("PARAMETROS", "RETRATOPAISAGEM"), "R"},
+        {("PARAMETROS", "TIPO_CORTE_PAPEL"), "TOTAL"},
+        {("PARAMETROS", "MODELOREL"), "01"},
+        {("PARAMETROS", "CLIENTE"), "NOME_CLIENTE"},
+        {("PARAMETROS", "IMPRORDEMCARGA"), "N"},
+        {("PARAMETROS", "IMPREXTRSAIDA"), "N"},
+        {("PARAMETROS", "IMPRBOLENTR"), "N"},
+        {("PARAMETROS", "TICKETENTRSORT"), "N"},
+        {("PARAMETROS", "IMPRBOLANL"), "N"},
+        {("PARAMETROS", "IMPRETICKETRAST"), "N"},
+        {("PARAMETROS", "IMPREXTRPRODUTO"), "N"},
+        {("PARAMETROS", "DESCRMARCDAGUA1"), "CLIENTE"},
+        {("PARAMETROS", "DESCRMARCDAGUA2"), "CLIENTE"},
+        {("PARAMETROS", "IMPRLIBSEPARADA"), "N"},
+        {("PARAMETROS", "MODELO_ORDEMCARGA"), "02"},
+        {("PARAMETROS", "NUMERO_CARACTER_LINHA_OBS"), "40"},
+        {("PARAMETROS", "IMPR_TELA"), "N"},
+        {("PARAMETROS", "NOME_PC"), "NULO"},
+        {("PARAMETROS", "FG_IMPR_LITRO"), "N"},
+        {("PARAMETROS", "CD_UNID_IND"), "0"},
+        {("LOGS", "GRAVALOG"), "N"},
+        {("LOGS", "LOGDEBUG"), "N"},
+        {("LOGS", "LOG_OC_ERROR"), "Log_OrdenCarga_Error.log"},
+        {("LOGS", "LOG_EXS_ERROR"), "Log_ExtrSalida_Error.log"},
+        {("LOGS", "LOG_BOLA_ERROR"), "Log_BolAnalisis_Error.log"},
+        {("LOGS", "LOG_ERROR"), "Log_Error.log"},
+        {("LOGS", "LOG_TIMER_IMPR"), "Log_Timer_Impresion.log"},
+        {("LOGS", "LOG_DEBUG"), "Log_Debug.log"},
+        {("LOGS", "LOG_TESTE"), "Log_Testes.log"},
+        {("PARAMETROS", "TIMEZONE"), "0"}
+        }
+
+        Public Shared Sub CriaArquivoConfic()
+            Dim arquivo As String = Application.StartupPath & "\configuracao.ini"
+            If Not IO.File.Exists(arquivo) Then
+                Using fs As IO.FileStream = IO.File.Create(arquivo)
+                End Using
+            End If
+
+            If dadosarquivoini Is Nothing Then
+                dadosarquivoini = New Dictionary(Of (String, String), String)()
+            End If
+
+            For Each kvp In dicconfiginicial
+                Dim secao As String = kvp.Key.Item1
+                Dim chave As String = kvp.Key.Item2
+                Dim valor As String = kvp.Value
+
+                If Not dadosarquivoini.ContainsKey((secao, chave)) Then
+                    ArquivosTXT.fSetParamINI(secao, chave, valor, arquivo)
+                    dadosarquivoini.Add((secao, chave), valor)
+                End If
+            Next
+        End Sub
+    End Class
+
+
 
 End Module

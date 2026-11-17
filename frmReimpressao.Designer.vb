@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmReimpressao
     Inherits System.Windows.Forms.Form
 
     'Descartar substituições de formulário para limpar a lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmReimpressao
     'OBSERVAÇÃO: o procedimento a seguir é exigido pelo Windows Form Designer
     'Pode ser modificado usando o Windows Form Designer.  
     'Não o modifique usando o editor de códigos.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReimpressao))
@@ -42,12 +42,17 @@ Partial Class frmReimpressao
         Me.PrintBolAnl_Balcanes = New System.Drawing.Printing.PrintDocument()
         Me.lbVersao = New System.Windows.Forms.Label()
         Me.PbStatusConexao = New System.Windows.Forms.PictureBox()
-        Me.BtStatus = New System.Windows.Forms.Button()
         Me.PrintOrdemCarga_Budeguer = New System.Drawing.Printing.PrintDocument()
         Me.PrintExtratoSaida_Budeguer = New System.Drawing.Printing.PrintDocument()
         Me.PrintBolAnl_Laredo = New System.Drawing.Printing.PrintDocument()
         Me.PrintExtratoSaida_Laredo = New System.Drawing.Printing.PrintDocument()
         Me.RbExtProducto = New System.Windows.Forms.RadioButton()
+        Me.RbTicketRast = New System.Windows.Forms.RadioButton()
+        Me.PrintTicketRastreio = New System.Drawing.Printing.PrintDocument()
+        Me.PrintExtrProduto_Budeguer = New System.Drawing.Printing.PrintDocument()
+        Me.RbBoletimEntr = New System.Windows.Forms.RadioButton()
+        Me.cbLiberacao = New System.Windows.Forms.CheckBox()
+        Me.cbAnalise = New System.Windows.Forms.CheckBox()
         CType(Me.PbStatusConexao, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -121,7 +126,7 @@ Partial Class frmReimpressao
         'rbOrdemCarga
         '
         Me.rbOrdemCarga.AutoSize = True
-        Me.rbOrdemCarga.Location = New System.Drawing.Point(99, 58)
+        Me.rbOrdemCarga.Location = New System.Drawing.Point(14, 49)
         Me.rbOrdemCarga.Name = "rbOrdemCarga"
         Me.rbOrdemCarga.Size = New System.Drawing.Size(121, 20)
         Me.rbOrdemCarga.TabIndex = 3
@@ -132,7 +137,7 @@ Partial Class frmReimpressao
         'rbExtratoSaida
         '
         Me.rbExtratoSaida.AutoSize = True
-        Me.rbExtratoSaida.Location = New System.Drawing.Point(229, 58)
+        Me.rbExtratoSaida.Location = New System.Drawing.Point(144, 49)
         Me.rbExtratoSaida.Name = "rbExtratoSaida"
         Me.rbExtratoSaida.Size = New System.Drawing.Size(134, 20)
         Me.rbExtratoSaida.TabIndex = 4
@@ -151,7 +156,7 @@ Partial Class frmReimpressao
         'rbBolAnl
         '
         Me.rbBolAnl.AutoSize = True
-        Me.rbBolAnl.Location = New System.Drawing.Point(370, 58)
+        Me.rbBolAnl.Location = New System.Drawing.Point(285, 49)
         Me.rbBolAnl.Name = "rbBolAnl"
         Me.rbBolAnl.Size = New System.Drawing.Size(163, 20)
         Me.rbBolAnl.TabIndex = 5
@@ -167,7 +172,7 @@ Partial Class frmReimpressao
         '
         Me.lbVersao.AutoSize = True
         Me.lbVersao.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbVersao.Location = New System.Drawing.Point(12, 90)
+        Me.lbVersao.Location = New System.Drawing.Point(17, 106)
         Me.lbVersao.Name = "lbVersao"
         Me.lbVersao.Size = New System.Drawing.Size(32, 12)
         Me.lbVersao.TabIndex = 6
@@ -175,26 +180,11 @@ Partial Class frmReimpressao
         '
         'PbStatusConexao
         '
-        Me.PbStatusConexao.Location = New System.Drawing.Point(534, 90)
+        Me.PbStatusConexao.Location = New System.Drawing.Point(492, 106)
         Me.PbStatusConexao.Name = "PbStatusConexao"
-        Me.PbStatusConexao.Size = New System.Drawing.Size(26, 20)
+        Me.PbStatusConexao.Size = New System.Drawing.Size(33, 10)
         Me.PbStatusConexao.TabIndex = 7
         Me.PbStatusConexao.TabStop = False
-        '
-        'BtStatus
-        '
-        Me.BtStatus.Enabled = False
-        Me.BtStatus.Location = New System.Drawing.Point(504, 90)
-        Me.BtStatus.Name = "BtStatus"
-        Me.BtStatus.Size = New System.Drawing.Size(24, 23)
-        Me.BtStatus.TabIndex = 8
-        Me.BtStatus.UseVisualStyleBackColor = True
-        '
-        'PrintOrdemCarga_Budeguer
-        '
-        '
-        'PrintExtratoSaida_Budeguer
-        '
         '
         'PrintBolAnl_Laredo
         '
@@ -207,7 +197,7 @@ Partial Class frmReimpressao
         'RbExtProducto
         '
         Me.RbExtProducto.AutoSize = True
-        Me.RbExtProducto.Location = New System.Drawing.Point(99, 83)
+        Me.RbExtProducto.Location = New System.Drawing.Point(144, 74)
         Me.RbExtProducto.Name = "RbExtProducto"
         Me.RbExtProducto.Size = New System.Drawing.Size(100, 20)
         Me.RbExtProducto.TabIndex = 9
@@ -215,13 +205,66 @@ Partial Class frmReimpressao
         Me.RbExtProducto.Text = "Ext Producto"
         Me.RbExtProducto.UseVisualStyleBackColor = True
         '
+        'RbTicketRast
+        '
+        Me.RbTicketRast.AutoSize = True
+        Me.RbTicketRast.Location = New System.Drawing.Point(14, 75)
+        Me.RbTicketRast.Name = "RbTicketRast"
+        Me.RbTicketRast.Size = New System.Drawing.Size(111, 20)
+        Me.RbTicketRast.TabIndex = 10
+        Me.RbTicketRast.TabStop = True
+        Me.RbTicketRast.Text = "Tique Rastreo"
+        Me.RbTicketRast.UseVisualStyleBackColor = True
+        '
+        'PrintTicketRastreio
+        '
+        Me.PrintTicketRastreio.DocumentName = "Ticket_Rastreio"
+        '
+        'PrintExtrProduto_Budeguer
+        '
+        Me.PrintExtrProduto_Budeguer.DocumentName = "Extracto Producto"
+        '
+        'RbBoletimEntr
+        '
+        Me.RbBoletimEntr.AutoSize = True
+        Me.RbBoletimEntr.Location = New System.Drawing.Point(285, 75)
+        Me.RbBoletimEntr.Name = "RbBoletimEntr"
+        Me.RbBoletimEntr.Size = New System.Drawing.Size(119, 20)
+        Me.RbBoletimEntr.TabIndex = 11
+        Me.RbBoletimEntr.TabStop = True
+        Me.RbBoletimEntr.Text = "Boletin de Patio"
+        Me.RbBoletimEntr.UseVisualStyleBackColor = True
+        '
+        'cbLiberacao
+        '
+        Me.cbLiberacao.AutoSize = True
+        Me.cbLiberacao.Location = New System.Drawing.Point(477, 50)
+        Me.cbLiberacao.Name = "cbLiberacao"
+        Me.cbLiberacao.Size = New System.Drawing.Size(89, 20)
+        Me.cbLiberacao.TabIndex = 12
+        Me.cbLiberacao.Text = "Liberación"
+        Me.cbLiberacao.UseVisualStyleBackColor = True
+        '
+        'cbAnalise
+        '
+        Me.cbAnalise.AutoSize = True
+        Me.cbAnalise.Location = New System.Drawing.Point(477, 74)
+        Me.cbAnalise.Name = "cbAnalise"
+        Me.cbAnalise.Size = New System.Drawing.Size(73, 20)
+        Me.cbAnalise.TabIndex = 13
+        Me.cbAnalise.Text = "Analisis"
+        Me.cbAnalise.UseVisualStyleBackColor = True
+        '
         'frmReimpressao
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(572, 115)
+        Me.ClientSize = New System.Drawing.Size(583, 128)
+        Me.Controls.Add(Me.cbAnalise)
+        Me.Controls.Add(Me.cbLiberacao)
+        Me.Controls.Add(Me.RbBoletimEntr)
+        Me.Controls.Add(Me.RbTicketRast)
         Me.Controls.Add(Me.RbExtProducto)
-        Me.Controls.Add(Me.BtStatus)
         Me.Controls.Add(Me.PbStatusConexao)
         Me.Controls.Add(Me.lbVersao)
         Me.Controls.Add(Me.rbBolAnl)
@@ -260,10 +303,15 @@ Partial Class frmReimpressao
     Friend WithEvents PrintBolAnl_Balcanes As Printing.PrintDocument
     Friend WithEvents lbVersao As Label
     Friend WithEvents PbStatusConexao As PictureBox
-    Friend WithEvents BtStatus As Button
     Friend WithEvents PrintOrdemCarga_Budeguer As Printing.PrintDocument
     Friend WithEvents PrintExtratoSaida_Budeguer As Printing.PrintDocument
     Friend WithEvents PrintBolAnl_Laredo As Printing.PrintDocument
     Friend WithEvents PrintExtratoSaida_Laredo As Printing.PrintDocument
     Friend WithEvents RbExtProducto As RadioButton
+    Friend WithEvents RbTicketRast As RadioButton
+    Friend WithEvents PrintTicketRastreio As Printing.PrintDocument
+    Friend WithEvents PrintExtrProduto_Budeguer As Printing.PrintDocument
+    Friend WithEvents RbBoletimEntr As RadioButton
+    Friend WithEvents cbLiberacao As CheckBox
+    Friend WithEvents cbAnalise As CheckBox
 End Class
