@@ -2991,35 +2991,64 @@ Module Impressoes
 
             Dim IdViagem As String = vGlobal.gn03
 
-            Dim swhere As String = Nothing
-            If frmReimpressao.bBotaoImprimir = True Then
-                Dim sIdViagem As String = FUltimaViagem(frmReimpressao.tbBoletim.Text, "A,P")
-                swhere = " And c.pfg_impr_bolanl = 'S'" & vbNewLine &
-                         " and c.id_viagem = " & FIdViagem(sIdViagem)
-            ElseIf frmReimpressao.bBotaoImprimir = False Then
-                swhere = "  and c.id_viagem =" & IdViagem & vbNewLine &
-                         "  and c.pfg_impr_bolanl is null"
+            Dim tblaptcargas As String = "apt_cargas"
+            Dim tblaptcargasrec As String = "apt_cargas_rec"
+            Dim valor As String = vGlobal.nRegistroImpressao
+
+            Dim swhere As New StringBuilder
+            If vGlobal.bBotaoImprimir = True Then
+                Dim partes() As String = Nothing
+                If Not String.IsNullOrWhiteSpace(valor) Then
+                    partes = valor.Split("*"c)
+                End If
+
+                Dim liberacao As String = Nothing
+                Dim ano As String = Nothing
+                If partes.Count >= 2 Then
+                    liberacao = partes(0)
+                    ano = partes(1)
+
+                    tblaptcargas = $"{tblaptcargas}_{ano}"
+                    tblaptcargasrec = $"{tblaptcargasrec}_{ano}"
+                Else
+                    liberacao = partes(0)
+                End If
+
+                IdViagem = FIdViagem(liberacao, tblaptcargas)
+                swhere.AppendLine(" and c.pfg_impr_bolanl = :fg_impr_bolanl")
+                swhere.AppendLine(" and c.id_viagem = :id_viagem")
+            ElseIf vGlobal.bBotaoImprimir = False Then
+                swhere.AppendLine("  and c.id_viagem = :id_viagem")
+                swhere.AppendLine("  and c.pfg_impr_bolanl is null")
             End If
 
-            Dim sql1 As New StringBuilder
-            sql1.Clear()
-            sql1.AppendLine("select c.no_sequencia,c.no_liberacao,c.no_analise,")
-            sql1.AppendLine("e.cd_equipto||' '||e.no_placa equipo,r.cd_operador,")
-            sql1.AppendLine("t.cd_transp||'-'||t.de_transp transp,")
-            sql1.AppendLine("c.hr_guarita,u.cd_upnivel1||'-'||u.de_upnivel1 upnivel1,")
-            sql1.AppendLine("f.cd_fornec||'-'||f.de_fornec fornec")
-            sql1.AppendLine("from apt_cargas c")
-            sql1.AppendLine("inner join apt_cargas_rec r on r.instancia = c.instancia and r.no_liberacao = c.no_liberacao")
-            sql1.AppendLine("inner join equiptos e on e.cd_equipto = r.cd_equipto")
-            sql1.AppendLine("inner join transporta t on t.cd_transp = e.cd_transp")
-            sql1.AppendLine("inner join upnivel1 u on u.cd_upnivel1 = c.cd_upnivel1")
-            sql1.AppendLine("inner join fornecs f on f.cd_fornec = u.cd_fornec")
-            sql1.AppendLine("where c.instancia = '" & vInstLogin & "'")
-            sql1.AppendLine("  and r.cd_tp_recurso = 'CM'")
-            sql1.AppendLine("  and c.fg_analise = 'S'")
-            sql1.AppendLine("" & swhere & "")
-            Using cmd3 As OracleCommand = fCmd(sql1.ToString)
-                Using rs As OracleDataReader = cmd3.ExecuteReader
+            Dim sql As New StringBuilder
+            sql.AppendLine("select c.no_sequencia,c.no_liberacao,c.no_analise,")
+            sql.AppendLine("e.cd_equipto||' '||e.no_placa equipo,r.cd_operador,")
+            sql.AppendLine("t.cd_transp||'-'||t.de_transp transp,")
+            sql.AppendLine("c.hr_guarita,u.cd_upnivel1||'-'||u.de_upnivel1 upnivel1,")
+            sql.AppendLine("f.cd_fornec||'-'||f.de_fornec fornec")
+            sql.AppendLine($"from {tblaptcargas} c")
+            sql.AppendLine($"inner join {tblaptcargasrec} r on r.instancia = c.instancia and r.no_liberacao = c.no_liberacao")
+            sql.AppendLine("inner join equiptos e on e.cd_equipto = r.cd_equipto")
+            sql.AppendLine("inner join transporta t on t.cd_transp = e.cd_transp")
+            sql.AppendLine("inner join upnivel1 u on u.cd_upnivel1 = c.cd_upnivel1")
+            sql.AppendLine("inner join fornecs f on f.cd_fornec = u.cd_fornec")
+            sql.AppendLine("where c.instancia = :instancia")
+            sql.AppendLine("  and r.cd_tp_recurso = :cd_tp_recurso")
+            sql.AppendLine("  and c.fg_analise = :fg_analise")
+            sql.AppendLine($"{swhere.ToString}")
+            Using cmd As OracleCommand = fCmd(sql.ToString)
+                cmd.Parameters.Add("instancia", OracleDbType.Varchar2).Value = vInstLogin
+                cmd.Parameters.Add("cd_tp_recurso", OracleDbType.Varchar2).Value = "CM"
+                cmd.Parameters.Add("fg_analise", OracleDbType.Varchar2).Value = "S"
+                cmd.Parameters.Add("id_viagem", OracleDbType.Int32).Value = IdViagem
+
+                If vGlobal.bBotaoImprimir = True Then
+                    cmd.Parameters.Add("fg_impr_bolanl", OracleDbType.Varchar2).Value = "S"
+                End If
+
+                Using rs As OracleDataReader = cmd.ExecuteReader
                     While rs.Read
                         noSeq = rs("no_sequencia")
                         vMensangem += "noSeq: " & rs("no_sequencia") & vbNewLine
@@ -3038,7 +3067,7 @@ Module Impressoes
                         cdFazenda = rs("upnivel1").ToString.Replace(",", " ")
                         cdFornecedor = rs("fornec").ToString.Replace(",", " ")
                         noAnalise = rs("no_analise")
-                        qtBruto = fPesoBrutoBolAnl(noLiberacao)
+                        qtBruto = fPesoBrutoBolAnl(noLiberacao, tblaptcargas)
 
                         barras1 = codbarras.Draw(noAnalise, altura)
                         barras2 = codbarras.Draw(noAnalise, altura)
@@ -3144,45 +3173,46 @@ Module Impressoes
             Dim sNoQueima, sCartoes, sQtConsumo, sCdEquipto, sCdUnidInd, sDeUnidInd As String
             Dim sWhere As String
             Dim bFgAbatec As Boolean
+            Dim txt As New StringBuilder
 
-            If frmReimpressao.bBotaoImprimir = True Then
-                'sWhere = "  and ld.pfg_ordem_carga = 'S' and ld.id_despacho = " & fUltimoDespacho(frmReimpressao.tbBoletim.Text) & ""
+            '------------------------------------------------------------------
+            '--- INICIO -------------------------------------------------------
+            '--- Ticket #4818 -------------------------------------------------
+            '--- Impresión de Orden de Carga y Extracto de Pesaje de otras zafras
+            '--- Data: 17/11/2026----------------------------------------------
+            Dim registro As String = Nothing
+            registro = vGlobal.nRegistroImpressao
+
+            Dim tblqueimaHe As String = "queima_he"
+            Dim tblqueimaDe As String = "queima_de"
+
+            Dim boletim As String = Nothing
+            Dim ano As String = Nothing
+
+            Dim partes() As String
+
+            If Not String.IsNullOrWhiteSpace(registro) Then
+                partes = Split(registro, "*"c)
+            End If
+
+            If vGlobal.bBotaoImprimir = True Then
+                If partes.Count >= 2 Then
+                    boletim = partes(0)
+                    ano = partes(1)
+
+                    tblqueimaHe = $"{tblqueimaHe}_{ano}"
+                    tblqueimaDe = $"{tblqueimaDe}_{ano}"
+
+                Else
+                    boletim = partes(0)
+                End If
+                '--- FINAL --------------------------------------------------------
                 sWhere = "and ld.pfg_ordem_carga = 'S' and ld.id_despacho = :id_despacho"
-            ElseIf frmReimpressao.bBotaoImprimir = False Then
+            ElseIf vGlobal.bBotaoImprimir = False Then
                 sWhere = "  and ld.fg_status = 'A' and ld.pfg_ordem_carga is null"
             End If
 
             Dim sql As New StringBuilder
-            'Alteração dia 12/06/2023
-            '"  and ld.instancia = llc.instancia" & vbNewLine &
-            'Retirada do relacionamento da instancia da liberação com o despacho
-
-            'sql.AppendLine("select ld.id_despacho," & vbNewLine &
-            '      "       to_char(ld.dthr_inicio,'dd/mm/yyyy') data," & vbNewLine &
-            '      "       to_char(ld.dthr_inicio,'hh24:mi:ss') hora," & vbNewLine &
-            '      "       fn.cd_fornec||'-'||fn.de_fornec fornecedor," & vbNewLine &
-            '      "       ft.cd_fren_tran||'-'||ft.de_fren_tran frente," & vbNewLine &
-            '      "       e.cd_equipto||'-'||e.no_placa veiculo,e.cd_equipto," & vbNewLine &
-            '      "       tt.cd_transp||'-'||tt.de_transp prestador," & vbNewLine &
-            '      "       trim(u1.cd_upnivel1)||'-'||u1.de_upnivel1 fazenda," & vbNewLine &
-            '      "       llc.no_queima,nvl(round(ld.qt_consumo,0),0) qt_consumo," & vbNewLine &
-            '      "       ld.cd_unid_ind" & vbNewLine &
-            '      "from lt_despachos ld, lt_liberacao_carreg llc," & vbNewLine &
-            '      "     pminstancias pi , equiptos e ," & vbNewLine &
-            '      "     queima_he qh, queima_de qd, frentransp ft, sistcolh sc," & vbNewLine &
-            '      "     upnivel1 u1, fornecs fn, transporta tt" & vbNewLine &
-            '      "where tt.cd_transp = e.cd_transp" & vbNewLine &
-            '      "  and fn.cd_fornec = u1.cd_fornec" & vbNewLine &
-            '      "  and u1.cd_upnivel1 = qd.cd_upnivel1" & vbNewLine &
-            '      "  and sc.cd_sist_colh = llc.cd_sist_colh" & vbNewLine &
-            '      "  and ft.cd_fren_tran = llc.cd_fren_tran" & vbNewLine &
-            '      "  and qh.no_queima = llc.no_queima" & vbNewLine &
-            '      "  and qh.no_queima = qd.no_queima" & vbNewLine &
-            '      "  and e.cd_equipto = ld.cd_equipto" & vbNewLine &
-            '      "  and pi.instancia = ld.instancia" & vbNewLine &
-            '      "  and ld.id_liberacao = llc.id_liberacao" & vbNewLine &
-            '      "  and pi.instancia = '" & vInstLogin & "'" & vbNewLine &
-            '      "" & sWhere & ""
             sql.AppendLine("select ld.id_despacho,")
             sql.AppendLine("to_char(ld.dthr_inicio,'dd/mm/yyyy') data,")
             sql.AppendLine("to_char(ld.dthr_inicio,'hh24:mi:ss') hora,")
@@ -3199,17 +3229,15 @@ Module Impressoes
             sql.AppendLine("inner join sistcolh sc on sc.cd_sist_colh = llc.cd_sist_colh")
             sql.AppendLine("inner join equiptos e on e.cd_equipto = ld.cd_equipto")
             sql.AppendLine("inner join transporta tt on tt.cd_transp = e.cd_transp")
-            sql.AppendLine("left join queima_he_2025 qh on qh.no_queima = llc.no_queima_ant")
-            sql.AppendLine("left join queima_de_2025 qd on qd.no_queima = qh.no_queima")
+            sql.AppendLine($"left join {tblqueimaHe} qh on qh.no_queima = llc.no_queima_ant")
+            sql.AppendLine($"left join {tblqueimaDe} qd on qd.no_queima = qh.no_queima")
             sql.AppendLine("left join upnivel1 u1 on u1.cd_upnivel1 = qd.cd_upnivel1")
             sql.AppendLine("left join fornecs fn on fn.cd_fornec = u1.cd_fornec")
             sql.AppendLine("where ld.instancia = :instancia")
             sql.AppendLine("and ld.id_despacho = :id_despacho")
             Using cmd As OracleCommand = fCmd(sql.ToString)
                 cmd.Parameters.Add("instancia", OracleDbType.Varchar2).Value = vInstLogin
-                cmd.Parameters.Add("id_despacho", OracleDbType.Int32).Value = CInt(frmReimpressao.tbBoletim.Text)
-                Dim txt As String = GetDebugSql(cmd)
-                TextLogDebug(txt)
+                cmd.Parameters.Add("id_despacho", OracleDbType.Int32).Value = CInt(boletim)
                 Using rs As OracleDataReader = cmd.ExecuteReader
                     While rs.Read
                         sNoOrdemCarga = rs("id_despacho")
@@ -3426,9 +3454,16 @@ Module Impressoes
             Dim tblAptCargas As String = "apt_cargas"
             Dim tblAptCargasRec As String = "apt_cargas_rec"
 
-            If frmReimpressao.bBotaoImprimir = True Then
-                Dim valorespartes As String = frmReimpressao.tbBoletim.Text
-                Dim partes() As String = valorespartes.Split("*"c)
+            Dim partes() As String
+            Dim valorespartes As String = vGlobal.nRegistroImpressao
+
+
+            If vGlobal.bBotaoImprimir = True Then
+                If String.IsNullOrWhiteSpace(valorespartes) Then
+                    MessageBox.Show("No se ha seleccionado ninguna liberación para imprimir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub
+                End If
+                partes = valorespartes.Split("*"c)
 
                 Dim liberacao As String = Nothing
                 Dim ano As String = Nothing
@@ -3443,161 +3478,163 @@ Module Impressoes
                     liberacao = partes(0)
                 End If
 
-                sLiberacoes = FUltimaViagem(liberacao, "P, C")
+                sLiberacoes = liberacao
 
                 If vGlobal.vIMPRLIBSEPARADA = "S" Then
-                    sWhere = "  And ac.pfg_impr_extr_saida = 'S' and ac.id_viagem = " & FIdViagem(sLiberacoes) & " and ac.no_liberacao = " & vGlobal.sValor04 & ""
+                    sWhere = $"  and ac.pfg_impr_extr_saida = 'S' and ac.id_viagem = {FIdViagem(sLiberacoes, tblAptCargas)}" '    and ac.no_liberacao = { vGlobal.sValor04 }   
                 ElseIf vGlobal.vIMPRLIBSEPARADA = "N" Then
-                    sWhere = "  and ac.pfg_impr_extr_saida = 'S' and ac.id_viagem = " & FIdViagem(sLiberacoes) & ""
+                    sWhere = $"  and ac.pfg_impr_extr_saida = 'S' and ac.id_viagem = {FIdViagem(sLiberacoes, tblAptCargas)}" '  and ac.no_liberacao = { vGlobal.sValor04 }
                 End If
 
-            ElseIf frmReimpressao.bBotaoImprimir = False Then
+            ElseIf vGlobal.bBotaoImprimir = False Then
                 If vGlobal.vIMPRLIBSEPARADA = "S" Then
-                    sWhere = "  and ac.pfg_impr_extr_saida is null and ac.no_liberacao = " & vGlobal.sValor04 & ""
+                    sWhere = $"  and ac.pfg_impr_extr_saida is null and ac.no_liberacao = { vGlobal.sValor04 }"
                 ElseIf vGlobal.vIMPRLIBSEPARADA = "N" Then
                     sWhere = "  and ac.pfg_impr_extr_saida is null"
                 End If
             End If
 
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select ac.instancia,ac.id_viagem,ac.no_sequencia," & vbNewLine &
-                  "       ac.no_liberacao,nvl(ac.ordem_carga,0) ordem_carga,nvl(ac.numero_remito,0) numero_remito," & vbNewLine &
-                  "       fn.cd_fornec || '-' || fn.de_fornec fornecedor," & vbNewLine &
-                  "       eq.cd_equipto || '-' || eq.no_placa equipamento," & vbNewLine &
-                  "       t.cd_transp||'-'||t.de_transp transporta,decode(ac.fg_cana_crua,'S','Cruda','Quemada') tipo_cana," & vbNewLine &
-                  "       trim(u1.cd_upnivel1) || '-' || u1.de_upnivel1 fazenda," & vbNewLine &
-                  "       f.cd_fren_tran||'-'||f.de_fren_tran frente," & vbNewLine &
-                  "       ac.dt_entrada,ac.hr_entrada," & vbNewLine &
-                  "       ac.dt_saida,ac.hr_saida," & vbNewLine &
-                  "       ac.dt_movimento,nvl(ac.qt_bruto,0) qt_bruto," & vbNewLine &
-                  "       nvl(ac.qt_tara,0) qt_tara,nvl(ac.qt_liquido,0) qt_liquido," & vbNewLine &
-                  "       ac.fg_cana_crua,ac.no_cartao,ac.no_queima," & vbNewLine &
-                  "       trim(ac.cd_upnivel1) cd_upnivel1,trim(ac.cd_upnivel2) cd_upnivel2,trim(ac.cd_upnivel3) cd_upnivel3" & vbNewLine &
-                  $"  from {tblAptCargas} ac," & vbNewLine &
-                  $"       {tblAptCargasRec} acr," & vbNewLine &
-                  "       equiptos       eq," & vbNewLine &
-                  "       fornecs        fn," & vbNewLine &
-                  "       upnivel1       u1," & vbNewLine &
-                  "       transporta     t," & vbNewLine &
-                  "       frentransp     f" & vbNewLine &
-                  " WHERE f.cd_fren_tran = ac.cd_fren_tran" & vbNewLine &
-                  "   And t.cd_transp = eq.cd_transp" & vbNewLine &
-                  "   And u1.cd_upnivel1 = ac.cd_upnivel1" & vbNewLine &
-                  "   And fn.cd_fornec = u1.cd_fornec" & vbNewLine &
-                  "   And eq.cd_equipto = acr.cd_equipto" & vbNewLine &
-                  "   And acr.instancia = ac.instancia" & vbNewLine &
-                  "   And acr.no_liberacao = ac.no_liberacao" & vbNewLine &
-                  "   And acr.cd_tp_recurso = 'CM'" & vbNewLine &
-                  "   and ac.instancia = '" & vInstLogin & "'" & vbNewLine &
-                  "   and ac.dt_saida is not null" & vbNewLine &
-                  "" & sWhere & "" & vbNewLine &
-                  " order by 2, 3"
+            Dim sql As New StringBuilder
+            sql.AppendLine("select ac.instancia,ac.id_viagem,ac.no_sequencia,")
+            sql.AppendLine("       ac.no_liberacao,nvl(ac.ordem_carga,0) ordem_carga,nvl(ac.numero_remito,0) numero_remito,")
+            sql.AppendLine("       fn.cd_fornec || '-' || fn.de_fornec fornecedor,")
+            sql.AppendLine("       eq.cd_equipto || '-' || eq.no_placa equipamento,")
+            sql.AppendLine("       t.cd_transp||'-'||t.de_transp transporta,decode(ac.fg_cana_crua,'S','Cruda','Quemada') tipo_cana,")
+            sql.AppendLine("       trim(u1.cd_upnivel1) || '-' || u1.de_upnivel1 fazenda,")
+            sql.AppendLine("       f.cd_fren_tran||'-'||f.de_fren_tran frente,")
+            sql.AppendLine("       ac.dt_entrada,ac.hr_entrada,")
+            sql.AppendLine("       ac.dt_saida,ac.hr_saida,")
+            sql.AppendLine("       ac.dt_movimento,nvl(ac.qt_bruto,0) qt_bruto,")
+            sql.AppendLine("       nvl(ac.qt_tara,0) qt_tara,nvl(ac.qt_liquido,0) qt_liquido,")
+            sql.AppendLine("       ac.fg_cana_crua,ac.no_cartao,ac.no_queima,")
+            sql.AppendLine("       trim(ac.cd_upnivel1) cd_upnivel1,trim(ac.cd_upnivel2) cd_upnivel2,trim(ac.cd_upnivel3) cd_upnivel3")
+            sql.AppendLine($"  from {tblAptCargas} ac,")
+            sql.AppendLine($"       {tblAptCargasRec} acr,")
+            sql.AppendLine("       equiptos       eq,")
+            sql.AppendLine("       fornecs        fn,")
+            sql.AppendLine("       upnivel1       u1,")
+            sql.AppendLine("       transporta     t,")
+            sql.AppendLine("       frentransp     f")
+            sql.AppendLine(" where f.cd_fren_tran = ac.cd_fren_tran")
+            sql.AppendLine("   and t.cd_transp = eq.cd_transp")
+            sql.AppendLine("   and u1.cd_upnivel1 = ac.cd_upnivel1")
+            sql.AppendLine("   and fn.cd_fornec = u1.cd_fornec")
+            sql.AppendLine("   and eq.cd_equipto = acr.cd_equipto")
+            sql.AppendLine("   and acr.instancia = ac.instancia")
+            sql.AppendLine("   and acr.no_liberacao = ac.no_liberacao")
+            sql.AppendLine("   and acr.cd_tp_recurso = :cd_tp_recurso")
+            sql.AppendLine("   and ac.instancia = :instancia")
+            sql.AppendLine("   and ac.dt_saida is not null")
+            sql.AppendLine($"{sWhere}")
+            sql.AppendLine(" order by 2, 3")
+            Using cmd As OracleCommand = fCmd(sql.ToString)
+                cmd.Parameters.Add("instancia", OracleDbType.Varchar2).Value = vInstLogin
+                cmd.Parameters.Add("cd_tp_recurso", OracleDbType.Varchar2).Value = "CM"
 
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                sInstancia = rs("instancia")
-                sIdViagem = rs("id_viagem")
-                sNoSequencia = rs("no_sequencia")
+                Using rs As OracleDataReader = cmd.ExecuteReader
+                    While rs.Read
+                        sInstancia = rs("instancia")
+                        sIdViagem = rs("id_viagem")
+                        sNoSequencia = rs("no_sequencia")
 
-                If sColhedora = Nothing Or sColhedora = 0 Then
-                    sColhedora = fEquiptoPesagem(rs("no_liberacao"), "CD")
-                End If
+                        If sColhedora = Nothing Or sColhedora = 0 Then
+                            sColhedora = fEquiptoPesagem(rs("no_liberacao"), "CD")
+                        End If
 
-                If sTrator = Nothing Or sTrator = 0 Then
-                    sTrator = fEquiptoPesagem(rs("no_liberacao"), "TT")
-                End If
+                        If sTrator = Nothing Or sTrator = 0 Then
+                            sTrator = fEquiptoPesagem(rs("no_liberacao"), "TT")
+                        End If
 
-                If sNoSequencia = 1 Then
-                    sNoSequencia1 = sNoSequencia
-                    sNoLiberacao1 = rs("no_liberacao")
-                    sNoLiberacao1 = sNoLiberacao1.PadRight(14, " ")
-                    sNoLiberacao1_ = rs("no_liberacao")
-                    nTotalBruto += rs("qt_bruto")
-                    nTotalTara += rs("qt_tara")
-                    nTotalLiqu += rs("qt_liquido")
-                    sQtBruto1 = rs("qt_bruto")
-                    sQtBruto1 = sQtBruto1.PadRight(14, " ")
-                    sQtTara1 = rs("qt_tara")
-                    sQtTara1 = sQtTara1.PadRight(14, " ")
-                    sQtLiquido1 = rs("qt_liquido")
-                    sQtLiquido1 = sQtLiquido1.PadRight(14, " ")
-                    sFrenTransp = rs("frente")
-                    sTipoCana = rs("tipo_cana")
-                    sNoCartao1 = rs("no_cartao")
-                    sOrdemCorte1 = rs("no_queima")
-                    sNivel11 = rs("cd_upnivel1")
-                    sNivel21 = rs("cd_upnivel2")
-                    sNivel31 = rs("cd_upnivel3")
-                ElseIf sNoSequencia = 2 Then
-                    sNoSequencia2 = sNoSequencia
-                    sNoLiberacao2 = rs("no_liberacao")
-                    sNoLiberacao2 = sNoLiberacao2.PadRight(14, " ")
-                    sNoLiberacao2_ = rs("no_liberacao")
-                    nTotalBruto += rs("qt_bruto")
-                    nTotalTara += rs("qt_tara")
-                    nTotalLiqu += rs("qt_liquido")
-                    sQtBruto2 = rs("qt_bruto")
-                    sQtBruto2 = sQtBruto2.PadRight(14, " ")
-                    sQtTara2 = rs("qt_tara")
-                    sQtTara2 = sQtTara2.PadRight(14, " ")
-                    sQtLiquido2 = rs("qt_liquido")
-                    sQtLiquido2 = sQtLiquido2.PadRight(14, " ")
-                    sNoCartao2 = rs("no_cartao")
-                    sOrdemCorte2 = rs("no_queima")
-                    sNivel12 = rs("cd_upnivel1")
-                    sNivel22 = rs("cd_upnivel2")
-                    sNivel32 = rs("cd_upnivel3")
-                ElseIf sNoSequencia = 3 Then
-                    sNoSequencia3 = sNoSequencia
-                    sNoLiberacao3 = rs("no_liberacao")
-                    sNoLiberacao3 = sNoLiberacao3.PadRight(14, " ")
-                    sNoLiberacao3_ = rs("no_liberacao")
-                    nTotalBruto += rs("qt_bruto")
-                    nTotalTara += rs("qt_tara")
-                    nTotalLiqu += rs("qt_liquido")
-                    sQtBruto3 = rs("qt_bruto")
-                    sQtBruto3 = sQtBruto3.PadRight(14, " ")
-                    sQtTara3 = rs("qt_tara")
-                    sQtTara3 = sQtTara3.PadRight(14, " ")
-                    sQtLiquido3 = rs("qt_liquido")
-                    sQtLiquido3 = sQtLiquido3.PadRight(14, " ")
-                    sNoCartao3 = rs("no_cartao")
-                    sOrdemCorte3 = rs("no_queima")
-                    sNivel13 = rs("cd_upnivel1")
-                    sNivel23 = rs("cd_upnivel2")
-                    sNivel33 = rs("cd_upnivel3")
-                End If
-                sTotalTara = nTotalTara
-                sTotalLiqu = nTotalLiqu
-                sTotalBruto = nTotalBruto
-                sTotalTara = sTotalTara.PadRight(14, " ")
-                sTotalLiqu = sTotalLiqu.PadRight(14, " ")
-                sTotalBruto = sTotalBruto.PadRight(14, " ")
-                sFazenda = rs("fazenda")
-                sFornecedor = rs("fornecedor")
-                sEquipamento = rs("equipamento")
-                sTransportCM = rs("transporta")
-                sDtEntrada = rs("dt_entrada")
-                sHrEntrada = rs("hr_entrada")
-                sDtSaida = rs("dt_saida")
-                sHrSaida = rs("hr_saida")
-                sDtMovimento = rs("dt_movimento")
-                sOrdemCarga = rs("ordem_carga")
-                If sNoSequencia = 1 Then
-                    sNumeroRemito1 = rs("numero_remito")
-                    sNumeroRemito1 = sNumeroRemito1.PadRight(14, " ")
-                ElseIf sNoSequencia = 2 Then
-                    sNumeroRemito2 = rs("numero_remito")
-                    sNumeroRemito2 = sNumeroRemito2.PadRight(14, " ")
-                ElseIf sNoSequencia = 3 Then
-                    sNumeroRemito3 = rs("numero_remito")
-                    sNumeroRemito3 = sNumeroRemito3.PadRight(14, " ")
-                End If
+                        If sNoSequencia = 1 Then
+                            sNoSequencia1 = sNoSequencia
+                            sNoLiberacao1 = rs("no_liberacao")
+                            sNoLiberacao1 = sNoLiberacao1.PadRight(14, " ")
+                            sNoLiberacao1_ = rs("no_liberacao")
+                            nTotalBruto += rs("qt_bruto")
+                            nTotalTara += rs("qt_tara")
+                            nTotalLiqu += rs("qt_liquido")
+                            sQtBruto1 = rs("qt_bruto")
+                            sQtBruto1 = sQtBruto1.PadRight(14, " ")
+                            sQtTara1 = rs("qt_tara")
+                            sQtTara1 = sQtTara1.PadRight(14, " ")
+                            sQtLiquido1 = rs("qt_liquido")
+                            sQtLiquido1 = sQtLiquido1.PadRight(14, " ")
+                            sFrenTransp = rs("frente")
+                            sTipoCana = rs("tipo_cana")
+                            sNoCartao1 = rs("no_cartao")
+                            sOrdemCorte1 = rs("no_queima")
+                            sNivel11 = rs("cd_upnivel1")
+                            sNivel21 = rs("cd_upnivel2")
+                            sNivel31 = rs("cd_upnivel3")
+                        ElseIf sNoSequencia = 2 Then
+                            sNoSequencia2 = sNoSequencia
+                            sNoLiberacao2 = rs("no_liberacao")
+                            sNoLiberacao2 = sNoLiberacao2.PadRight(14, " ")
+                            sNoLiberacao2_ = rs("no_liberacao")
+                            nTotalBruto += rs("qt_bruto")
+                            nTotalTara += rs("qt_tara")
+                            nTotalLiqu += rs("qt_liquido")
+                            sQtBruto2 = rs("qt_bruto")
+                            sQtBruto2 = sQtBruto2.PadRight(14, " ")
+                            sQtTara2 = rs("qt_tara")
+                            sQtTara2 = sQtTara2.PadRight(14, " ")
+                            sQtLiquido2 = rs("qt_liquido")
+                            sQtLiquido2 = sQtLiquido2.PadRight(14, " ")
+                            sNoCartao2 = rs("no_cartao")
+                            sOrdemCorte2 = rs("no_queima")
+                            sNivel12 = rs("cd_upnivel1")
+                            sNivel22 = rs("cd_upnivel2")
+                            sNivel32 = rs("cd_upnivel3")
+                        ElseIf sNoSequencia = 3 Then
+                            sNoSequencia3 = sNoSequencia
+                            sNoLiberacao3 = rs("no_liberacao")
+                            sNoLiberacao3 = sNoLiberacao3.PadRight(14, " ")
+                            sNoLiberacao3_ = rs("no_liberacao")
+                            nTotalBruto += rs("qt_bruto")
+                            nTotalTara += rs("qt_tara")
+                            nTotalLiqu += rs("qt_liquido")
+                            sQtBruto3 = rs("qt_bruto")
+                            sQtBruto3 = sQtBruto3.PadRight(14, " ")
+                            sQtTara3 = rs("qt_tara")
+                            sQtTara3 = sQtTara3.PadRight(14, " ")
+                            sQtLiquido3 = rs("qt_liquido")
+                            sQtLiquido3 = sQtLiquido3.PadRight(14, " ")
+                            sNoCartao3 = rs("no_cartao")
+                            sOrdemCorte3 = rs("no_queima")
+                            sNivel13 = rs("cd_upnivel1")
+                            sNivel23 = rs("cd_upnivel2")
+                            sNivel33 = rs("cd_upnivel3")
+                        End If
+                        sTotalTara = nTotalTara
+                        sTotalLiqu = nTotalLiqu
+                        sTotalBruto = nTotalBruto
+                        sTotalTara = sTotalTara.PadRight(14, " ")
+                        sTotalLiqu = sTotalLiqu.PadRight(14, " ")
+                        sTotalBruto = sTotalBruto.PadRight(14, " ")
+                        sFazenda = rs("fazenda")
+                        sFornecedor = rs("fornecedor")
+                        sEquipamento = rs("equipamento")
+                        sTransportCM = rs("transporta")
+                        sDtEntrada = rs("dt_entrada")
+                        sHrEntrada = rs("hr_entrada")
+                        sDtSaida = rs("dt_saida")
+                        sHrSaida = rs("hr_saida")
+                        sDtMovimento = rs("dt_movimento")
+                        sOrdemCarga = rs("ordem_carga")
+                        If sNoSequencia = 1 Then
+                            sNumeroRemito1 = rs("numero_remito")
+                            sNumeroRemito1 = sNumeroRemito1.PadRight(14, " ")
+                        ElseIf sNoSequencia = 2 Then
+                            sNumeroRemito2 = rs("numero_remito")
+                            sNumeroRemito2 = sNumeroRemito2.PadRight(14, " ")
+                        ElseIf sNoSequencia = 3 Then
+                            sNumeroRemito3 = rs("numero_remito")
+                            sNumeroRemito3 = sNumeroRemito3.PadRight(14, " ")
+                        End If
 
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
+                    End While
+                End Using
+            End Using
 
             vGlobal.sNomeEmpresa = cadempresas(cadparametros(("GERAIS", "CD_EMPRESA")))
 
@@ -3876,12 +3913,12 @@ Module Impressoes
         Impressoes.PrintTela.ShowDialog()
     End Sub
 
-    Public Function FUltimaViagem(nCaminhao, sStatusCarga)
+    Public Function FUltimaViagem(nCaminhao As Integer, sStatusCarga As String, tblcargas As String, tblrecursos As String)
         Try
             Dim result As String = Nothing
             Dim sql As String
             Dim rs As OracleDataReader
-            sql = "select max(C.no_liberacao) no_liberacao from apt_cargas c, apt_cargas_rec r" & vbNewLine
+            sql = $"select max(C.no_liberacao) no_liberacao from {tblcargas} c, {tblrecursos} r" & vbNewLine
             sql += "where c.instancia = r.instancia" & vbNewLine
             sql += "  and c.no_liberacao = r.no_liberacao" & vbNewLine
             sql += "  and r.cd_tp_recurso = 'CM'" & vbNewLine
@@ -3890,10 +3927,10 @@ Module Impressoes
             sql += "  and c.fg_status in ('" & sStatusCarga.ToString.Replace(",", "','") & "')"
             rs = fCmd(sql).ExecuteReader
             While rs.Read
-                    result = rs("no_liberacao")
-                End While
-                fCmd(sql).Dispose()
-                rs.Close()
+                result = rs("no_liberacao")
+            End While
+            fCmd(sql).Dispose()
+            rs.Close()
             If result <> Nothing Then
                 Return result
             Else
@@ -3906,30 +3943,25 @@ Module Impressoes
         End Try
     End Function
 
-    Public Function FIdViagem(nLiberacao)
+    Public Function FIdViagem(nLiberacao As Integer, tblcargas As String) As Integer?
         Try
-            Dim result As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select distinct id_viagem from apt_cargas" & vbNewLine &
-                  "where instancia = '" & vInstLogin & "'" & vbNewLine &
-                  "  and no_liberacao = " & nLiberacao & ""
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                result = rs("id_viagem")
-            End While
-            fCmd(sql).Dispose()
-                rs.Close()
-
-            If result <> Nothing Then
-                Return result
-            Else
-                Return 0
-            End If
+            Dim sql As New StringBuilder
+            sql.AppendLine($"select distinct id_viagem from {tblcargas}")
+            sql.AppendLine("where instancia = :instancia")
+            sql.AppendLine("  and no_liberacao = :no_liberacao")
+            Using cmd As OracleCommand = fCmd(sql.ToString)
+                cmd.Parameters.Add("instancia", OracleDbType.Varchar2).Value = vInstLogin
+                cmd.Parameters.Add("no_liberacao", OracleDbType.Int32).Value = nLiberacao
+                Using rs As OracleDataReader = cmd.ExecuteReader
+                    If rs.Read AndAlso Not rs.IsDBNull(rs.GetOrdinal("id_viagem")) Then
+                        Return Convert.ToInt32(rs("id_viagem"))
+                    End If
+                End Using
+            End Using
+            Return Nothing
         Catch ex As Exception
-            vGlobal.vMensangem += ex.ToString
-            fGravaError("frmReimpressao", "fIdViagem", vGlobal.vMensangem, "LOG_ERROR")
-            vGlobal.vMensangem = Nothing
+            fGravaError("frmReimpressao", "fIdViagem", ex.ToString, "LOG_ERROR")
+            Return Nothing
         End Try
     End Function
 
@@ -4570,27 +4602,26 @@ Module Impressoes
         rs.Close()
     End Sub
 
-    Private Function fPesoBrutoBolAnl(noLiberacao) As String
+    Private Function fPesoBrutoBolAnl(noLiberacao As Integer, tblcargas As String) As Integer?
         Try
-            Dim result As String = Nothing
-            Dim sql As String
-            Dim rs As OracleDataReader
-            sql = "select sum(nvl(qt_bruto,0)) qt_bruto from apt_cargas" & vbNewLine &
-                  "where instancia = '" & vInstLogin & "'" & vbNewLine &
-                  "  and no_liberacao = " & noLiberacao & ""
-            rs = fCmd(sql).ExecuteReader
-            While rs.Read
-                result = rs("qt_bruto")
-            End While
-            fCmd(sql).Dispose()
-            rs.Close()
-            If result <> Nothing Then
-                Return result
-            Else
-                Return 0
-            End If
+            Dim sql As New StringBuilder
+            sql.AppendLine($"select sum(nvl(qt_bruto,0)) qt_bruto from {tblcargas}")
+            sql.AppendLine("where instancia = :instancia")
+            sql.AppendLine("  and no_liberacao = :no_liberacao")
+            Using cmd As OracleCommand = fCmd(sql.ToString)
+                cmd.Parameters.Add("instancia", OracleDbType.Varchar2).Value = vInstLogin
+                cmd.Parameters.Add("no_liberacao", OracleDbType.Int32).Value = noLiberacao
+                Using rs As OracleDataReader = cmd.ExecuteReader
+                    If rs.Read AndAlso Not IsDBNull(rs("qt_bruto")) Then
+                        Return Convert.ToInt32(rs("qt_bruto"))
+                    Else
+                        Return Nothing
+                    End If
+                End Using
+            End Using
         Catch ex As Exception
             MsgBox("fPesoBrutoBolAnl: " & ex.ToString)
+            Return Nothing
         End Try
     End Function
 
@@ -4945,17 +4976,52 @@ Module Impressoes
                 Try
                     Dim resultado As New List(Of ImprExtratoSaida)
 
+                    ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    ''' INICIO
+                    ''' Ticket #4848
+                    ''' Data: 18/11/2026 
+                    ''' Impresión de Orden de Carga y Extracto de Pesaje de otras zafras
+                    ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Dim tblaptcargas As String = "apt_cargas"
+                    Dim tblaptcargasrec As String = "apt_cargas_rec"
+                    Dim tblltdespachos As String = "lt_despachos"
+
+                    ''' FINAL
+
+
+
                     Dim sWhere As String = Nothing
-                    Dim sNoLiberacao As Integer = 0
-                    If frmReimpressao.bBotaoImprimir = True Then
-                        sNoLiberacao = frmReimpressao.tbBoletim.Text
+                    Dim sNoLiberacao As String = Nothing
+                    Dim ano As String = Nothing
+                    Dim valor As String = vGlobal.nRegistroImpressao
+                    Dim partes() As String = Nothing
+                    If vGlobal.bBotaoImprimir = True Then
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        ''' INICIO
+                        ''' Ticket #4848
+                        ''' Data: 18/11/2026 
+                        ''' Impresión de Orden de Carga y Extracto de Pesaje de otras zafras
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        partes = valor.Split("*"c)
+                        If partes.Count >= 2 Then
+                            sNoLiberacao = partes(0)
+                            ano = partes(1)
+
+                            tblaptcargas = $"{tblaptcargas}_{ano}"
+                            tblaptcargasrec = $"{tblaptcargasrec}_{ano}"
+                            tblltdespachos = $"{tblltdespachos}_{ano}"
+                        Else
+                            sNoLiberacao = partes(0)
+                        End If
+                        ''' FINAL
+
                         If vGlobal.vIMPRLIBSEPARADA = "S" Then
                             sWhere = "  and ac.pfg_impr_extr_saida = :pfg_impr_extr_saida and ac.id_viagem = :id_viagem and ac.no_liberacao = :no_liberacao"
                         ElseIf vGlobal.vIMPRLIBSEPARADA = "N" Then
                             sWhere = "  and ac.pfg_impr_extr_saida = :pfg_impr_extr_saida and ac.id_viagem = :id_viagem"
                         End If
 
-                    ElseIf frmReimpressao.bBotaoImprimir = False Then
+                    ElseIf vglobal.bBotaoImprimir = False Then
                         If vGlobal.vIMPRLIBSEPARADA = "S" Then
                             sWhere = "  and ac.pfg_impr_extr_saida = :pfg_impr_extr_saida and ac.no_liberacao = :no_liberacao"
                         ElseIf vGlobal.vIMPRLIBSEPARADA = "N" Then
@@ -4976,14 +5042,14 @@ Module Impressoes
                     sql.AppendLine("ac.dt_saida,ac.hr_saida,ac.dt_movimento,")
                     sql.AppendLine("nvl(ac.qt_bruto, 0) qt_bruto,nvl(ac.qt_tara, 0) qt_tara,")
                     sql.AppendLine("nvl(ac.qt_liquido, 0) qt_liquido")
-                    sql.AppendLine("from apt_cargas     ac")
-                    sql.AppendLine("inner join apt_cargas_rec acr on acr.instancia = ac.instancia and acr.no_liberacao = ac.no_liberacao")
+                    sql.AppendLine($"from {tblaptcargas} ac")
+                    sql.AppendLine($"inner join {tblaptcargasrec} acr on acr.instancia = ac.instancia and acr.no_liberacao = ac.no_liberacao")
                     sql.AppendLine("inner join equiptos eq on eq.cd_equipto = acr.cd_equipto")
                     sql.AppendLine("inner join upnivel1 u1 on u1.cd_upnivel1 = ac.cd_upnivel1")
                     sql.AppendLine("inner join fornecs  fn on fn.cd_fornec = u1.cd_fornec")
                     sql.AppendLine("inner join transporta t on t.cd_transp = eq.cd_transp")
                     sql.AppendLine("inner join sistcolh s on s.cd_sist_colh = ac.cd_sist_colh")
-                    sql.AppendLine("left join lt_despachos d on d.instancia = ac.instancia and d.id_despacho = ac.id_despacho ")
+                    sql.AppendLine($"left join {tblltdespachos} d on d.instancia = ac.instancia and d.id_despacho = ac.id_despacho ")
                     sql.AppendLine("where acr.cd_tp_recurso = :cd_tp_recurso")
                     sql.AppendLine("and ac.instancia = :instancia")
                     sql.AppendLine("and ac.dt_saida is not null")
@@ -4993,18 +5059,18 @@ Module Impressoes
                         cmd.Parameters.Clear()
                         cmd.Parameters.Add("instancia", OracleDbType.Varchar2).Value = vInstLogin
                         cmd.Parameters.Add("cd_tp_recurso", OracleDbType.Varchar2).Value = "CM"
-                        If frmReimpressao.bBotaoImprimir = True Then
+                        If vGlobal.bBotaoImprimir = True Then
                             sNoLiberacao = frmReimpressao.tbBoletim.Text
                             If vGlobal.vIMPRLIBSEPARADA = "S" Then
                                 cmd.Parameters.Add("pfg_impr_extr_saida", OracleDbType.Varchar2).Value = "S"
-                                cmd.Parameters.Add("id_viagem", OracleDbType.Int64).Value = Convert.ToInt64(FIdViagem(sNoLiberacao))
+                                cmd.Parameters.Add("id_viagem", OracleDbType.Int64).Value = Convert.ToInt64(FIdViagem(sNoLiberacao, tblaptcargas))
                                 cmd.Parameters.Add("no_liberacao", OracleDbType.Int64).Value = Convert.ToInt64(vGlobal.sValor04)
                             ElseIf vGlobal.vIMPRLIBSEPARADA = "N" Then
                                 cmd.Parameters.Add("pfg_impr_extr_saida", OracleDbType.Varchar2).Value = "S"
-                                cmd.Parameters.Add("id_viagem", OracleDbType.Int64).Value = Convert.ToInt64(FIdViagem(sNoLiberacao))
+                                cmd.Parameters.Add("id_viagem", OracleDbType.Int64).Value = Convert.ToInt64(FIdViagem(sNoLiberacao, tblaptcargas))
                             End If
 
-                        ElseIf frmReimpressao.bBotaoImprimir = False Then
+                        ElseIf vglobal.bBotaoImprimir = False Then
                             If vGlobal.vIMPRLIBSEPARADA = "S" Then
                                 cmd.Parameters.Add("pfg_impr_extr_saida", OracleDbType.Varchar2).Value = "N"
                                 cmd.Parameters.Add("no_liberacao", OracleDbType.Int64).Value = Convert.ToInt64(vGlobal.sValor04)

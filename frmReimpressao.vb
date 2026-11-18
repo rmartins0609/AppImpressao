@@ -1689,6 +1689,8 @@ Public Class frmReimpressao
                 Me.Width = 553
                 Me.Height = 167
             End If
+        ElseIf vGlobal.vModeloImpressao = "00" Then
+            lbTexto.Text = "Liberación:"
         End If
     End Sub
 
@@ -1703,6 +1705,10 @@ Public Class frmReimpressao
             If rbExtratoSaida.Checked = True Then
                 lbTexto.Text = "Liberación:"
             Else
+            End If
+        ElseIf vGlobal.vModeloImpressao = "00" Then
+            If rbExtratoSaida.Checked = True Then
+                lbTexto.Text = "Liberación:"
             End If
         End If
     End Sub
@@ -1923,6 +1929,7 @@ Public Class frmReimpressao
     Private Sub rbOrdemCarga_CheckedChanged(sender As Object, e As EventArgs) Handles rbOrdemCarga.CheckedChanged
         If rbOrdemCarga.Checked Then
             vRelatImpr = "OC"
+            lbTexto.Text = "Orden Carga:"
         Else
             vRelatImpr = Nothing
         End If
@@ -2005,7 +2012,7 @@ Public Class frmReimpressao
     Private Sub ImprimirModeloBalcanes()
         If sCliente <> "BALCANES" Then Exit Sub
 
-        bBotaoImprimir = True
+        vGlobal.bBotaoImprimir = True
 
         If rbOrdemCarga.Checked Then
             ImprimirDocumento(Impressoes.PrintOrdemCarga_Balcanes, vGlobal.vNumeroCopias, Nothing, Nothing)

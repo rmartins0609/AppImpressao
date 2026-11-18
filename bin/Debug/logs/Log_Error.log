@@ -78,3 +78,32 @@
    em Oracle.ManagedDataAccess.Client.OracleConnection.Open()
    em AppImpressao.Conexao.fConexao() na C:\app\Projects\AppImpressao\Conexao.vb:linha 48
 
+18/11/2026 11:20:26 - ERROR *** [Conexao] ***
+18/11/2026 11:20:26 - ERROR - [fConexao]: Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-50000: Connection request timed out
+   em OracleInternal.ConnectionPool.PoolManager`3.Get(ConnectionString csWithDiffOrNewPassw, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch, Boolean bAsync)
+   em OracleInternal.ConnectionPool.OraclePoolManager.Get(ConnectionString csWithNewPassw, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch, Boolean bAsync)
+   em OracleInternal.ConnectionPool.OracleConnectionDispenser`3.Get(ConnectionString cs, PM conPM, ConnectionString pmCS, OracleOpaqueString opaquePassw, OracleOpaqueString securedProxyPassw, OracleConnection connRefForCriteria, Boolean bAsync)
+   em OracleInternal.ServiceObjects.OracleConnectionInternal.OpenInternal(Boolean bAsync)
+   em OracleInternal.ServiceObjects.OracleConnectionInternal.Open()
+   em Oracle.ManagedDataAccess.Client.OracleConnection.Open()
+   em AppImpressao.Conexao.fConexao() na C:\app\Projects\AppImpressao\Conexao.vb:linha 48
+
+18/11/2026 13:58:46 - ERROR *** [Conexao] ***
+18/11/2026 13:58:46 - ERROR - [fConexao]: Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-12545: Transporte de Rede: não é possível resolver o nome do host
+https://docs.oracle.com/error-help/db/ora-12545/ ---> OracleInternal.Network.NetworkException (0x80004005): ORA-12545: Transporte de Rede: não é possível resolver o nome do host
+https://docs.oracle.com/error-help/db/ora-12545/ ---> System.Net.Sockets.SocketException (0x80004005): Este host não é conhecido
+   em System.Net.Dns.GetAddrInfo(String name)
+   em System.Net.Dns.InternalGetHostByName(String hostName, Boolean includeIPv6)
+   em System.Net.Dns.GetHostAddresses(String hostNameOrAddress)
+   em OracleInternal.Network.TcpTransportAdapter.Connect(ConnectionOption conOption, Boolean bAsync)
+   em OracleInternal.Network.OracleCommunication.DoConnect(String tnsDescriptor, Boolean bAsync)
+   em OracleInternal.Network.OracleCommunication.Connect(String tnsDescriptor, Boolean doNAHandshake, String IName, ConnectionOption CO, Boolean bAsync)
+   em OracleInternal.ServiceObjects.OracleConnectionImpl.Connect(ConnectionString cs, Boolean bOpenEndUserSession, OracleConnection connRefForCriteria, String instanceName, Boolean bAsync)
+   em OracleInternal.ConnectionPool.PoolManager`3.Get(ConnectionString csWithDiffOrNewPassw, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch, Boolean bAsync)
+   em OracleInternal.ConnectionPool.OraclePoolManager.Get(ConnectionString csWithNewPassw, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch, Boolean bAsync)
+   em OracleInternal.ConnectionPool.OracleConnectionDispenser`3.Get(ConnectionString cs, PM conPM, ConnectionString pmCS, OracleOpaqueString opaquePassw, OracleOpaqueString securedProxyPassw, OracleConnection connRefForCriteria, Boolean bAsync)
+   em OracleInternal.ServiceObjects.OracleConnectionInternal.OpenInternal(Boolean bAsync)
+   em OracleInternal.ServiceObjects.OracleConnectionInternal.Open()
+   em Oracle.ManagedDataAccess.Client.OracleConnection.Open()
+   em AppImpressao.Conexao.fConexao() na C:\app\Projects\AppImpressao\Conexao.vb:linha 48
+
